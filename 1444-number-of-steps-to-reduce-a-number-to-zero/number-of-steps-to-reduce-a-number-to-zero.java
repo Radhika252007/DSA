@@ -7,12 +7,11 @@ class Solution {
             return steps;
         }
         if(num%2==0){
-            num = num/2;
+            return Steps(num/2,steps+1);
         }
-        else{
-            num = num-1;
-        }
-        steps++;
-        return Steps(num,steps++);
+
+            return Steps(num-1,steps+1);
+
+        
     }
 }
