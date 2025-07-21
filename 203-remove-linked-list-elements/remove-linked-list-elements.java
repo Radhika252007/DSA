@@ -15,13 +15,12 @@ class Solution {
         }
         ListNode output = new ListNode(0);
         ListNode point = output;
-        ListNode temp = head;
-        while(temp!=null){
-            if(temp.val != val){
-                point.next = temp;
+        while(head!=null){
+            if(head.val != val){
+                point.next = head;
                 point = point.next;
             }
-            temp = temp.next;
+            head = head.next;
         }
         point.next = null;
         return output.next;
