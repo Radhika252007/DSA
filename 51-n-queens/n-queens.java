@@ -7,7 +7,7 @@ class Solution {
     }
     static void queens(boolean[][] maze, int row, List<List<String>> list){
         if(row==maze.length){
-            list.add(display(maze,row));
+            list.add(display(maze));
             return;
         }
         for(int i=0;i<maze.length;i++){
@@ -39,12 +39,12 @@ class Solution {
         }
         return true;
     }
-    static List<String> display(boolean[][] maze, int row){
+    static List<String> display(boolean[][] maze){
         List<String> sol = new ArrayList<>();
-        for(int i=0;i<row;i++){
+        for(int i=0;i<maze.length;i++){
             char[] p = new char[maze.length];
             Arrays.fill(p,'.');
-            for(int j=0;j<row;j++){
+            for(int j=0;j<maze.length;j++){
                 if(maze[i][j]){
                     p[j]='Q';
                 }
