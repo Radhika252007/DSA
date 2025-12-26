@@ -12,14 +12,8 @@ class Solution {
     public ListNode removeNodes(ListNode head) {
         if(head==null || head.next==null) return head;
         Stack<Integer> st = new Stack<>();
-        int length = 0;
         ListNode curr = head;
         while(curr!=null){
-            curr = curr.next;
-            length++;
-        }
-        curr = head;
-        for(int i=0;i<length;i++){
             while(!st.isEmpty() && st.peek()<curr.val){
                 st.pop();
             }
