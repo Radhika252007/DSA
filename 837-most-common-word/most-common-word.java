@@ -1,7 +1,7 @@
 class Solution {
     public String mostCommonWord(String paragraph, String[] banned) {
         paragraph = paragraph.replaceAll("[^a-zA-Z ]", " ").toLowerCase();
-        String[] words = paragraph.split("\\s+");
+        String[] words = paragraph.trim().split("\\s+");
         HashMap<String,Integer> map = new HashMap<>();
         HashSet<String> set = new HashSet<>();
         for(int i=0;i<words.length;i++){
