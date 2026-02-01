@@ -1,2 +1,2 @@
 # Write your MySQL query statement below
-select c.name as Customers from Customers c where c.id not in (select distinct customerId from orders);
+select c.name as Customers from Customers c where c.id not in (select customerId from orders where customerId is not null);
