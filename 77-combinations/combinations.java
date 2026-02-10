@@ -12,7 +12,6 @@ class Solution {
             return;
         }
         for(int i=index;i<=n;i++){
-            if(curr.contains(i)) continue;
             curr.add(i);
             getCombinations(res,curr,n,k,i+1);
             curr.remove(curr.size()-1);
