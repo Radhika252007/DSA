@@ -14,7 +14,7 @@ class Solution {
                 sum += b.charAt(j) - '0';
                 j--;
             }
-            res.append(String.valueOf(sum%2));
+            res.append(sum%2);
             carry = sum / 2;
         }
         return res.reverse().toString();
