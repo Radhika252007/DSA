@@ -1,8 +1,6 @@
 class RecentCounter {
-    int count;
     Queue<Integer> q;
     public RecentCounter() {
-        count = 0;
         q = new LinkedList<>();
     }
     
@@ -10,10 +8,8 @@ class RecentCounter {
         q.add(t);
         while(!q.isEmpty() && t-q.peek() > 3000){
             q.poll();
-            count--;
         }
-        count++;
-        return count;
+        return q.size();
     }
 }
 
