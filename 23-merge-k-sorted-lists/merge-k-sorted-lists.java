@@ -10,50 +10,29 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        if(lists.length==0) return null;
-        if(lists.length==1) return lists[0];
-        ListNode currList = lists[0];
-        for(int i=1;i<lists.length;i++){
-            currList = mergeList(currList,lists[i]);
-        }
-        return currList;
-        
-    }
-    public ListNode mergeList(ListNode list1, ListNode list2){
-        if (list1 == null) return list2;
-if (list2 == null) return list1;
+        if(lists.length==0 || lists==null) return null;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b) -> a.val-b.val);
         ListNode newHead = null;
         ListNode curr = null;
-        ListNode temp1 = list1;
-        ListNode temp2 = list2;
-        while(temp1!=null && temp2!= null){
-            if(temp1.val <= temp2.val){
-                if(newHead==null){
-                    newHead = temp1;
-                    curr = newHead;
-                }
-                else{
-                    curr.next = temp1;
-                    curr = curr.next;
-                }
-                temp1 = temp1.next;
-            }
-            else{
-                if(newHead==null){
-                    newHead = temp2;
-                    curr = newHead;
-                }
-                else{
-                    curr.next = temp2;
-                    curr = curr.next;
-                }
-                temp2 = temp2.next;
+        for(ListNode list : lists){
+            if(list!=null){
+                pq.offer(list);
             }
         }
-        if (temp1 != null) curr.next = temp1;
-        if (temp2 != null) curr.next = temp2;
-
+        while(!pq.isEmpty()){
+            ListNode node = pq.poll();
+            if(newHead == null){
+                newHead = node;
+                curr = newHead;
+            }
+            else{
+                curr.next = node;
+                curr = curr.next;
+            }
+            if(node.next!=null){
+                pq.offer(node.next);
+            }
+        }
         return newHead;
-
     }
 }
