@@ -24,7 +24,6 @@ class Solution {
         char digit = up.charAt(0);
         String letters = map.get(digit);
         ArrayList<String> ans = new ArrayList<>();
-        int j = 0;
         for(int i = 0; i<letters.length();i++){
             ans.addAll(phonePad(p+letters.charAt(i),up.substring(1)));
         }
