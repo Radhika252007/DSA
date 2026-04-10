@@ -1,23 +1,20 @@
 class Solution {
     public int trap(int[] height) {
+        Stack<Integer> st = new Stack<>();
         int units = 0;
-        int l = 0;
-        int r =  height.length-1;
-        int leftMax = 0;
-        int rightMax = 0;
-        while(l<r){
-            if(height[l]<=height[r]){
-                leftMax = Math.max(height[l],leftMax);
-                units += leftMax - height[l];
-                l++;
+        for(int i=0;i<height.length;i++){
+            while(!st.isEmpty() && height[st.peek()] < height[i]){
+                int val = st.pop();
+                if(st.isEmpty()){
+                    break;
+                }
+                int left = st.peek();
+                int width = i - left - 1;
+                int boundedHeight = Math.min(height[left],height[i]) - height[val];
+                units  += width * boundedHeight;
             }
-            else{
-                rightMax = Math.max(height[r],rightMax);
-                units += rightMax - height[r];
-                r--;
-            }
+            st.push(i);
         }
         return units;
-       
     }
 }
