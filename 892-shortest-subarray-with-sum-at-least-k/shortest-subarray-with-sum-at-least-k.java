@@ -8,6 +8,7 @@ class Solution {
         }
     
         for(int i = 0 ;i<=nums.length;i++){
+            if(prefix[i] >= k) ans = Math.min(ans,i+1);
             while(!q.isEmpty() && prefix[i]- prefix[q.getFirst()] >= k){
                 ans = Math.min(ans,i-q.removeFirst());
             }
