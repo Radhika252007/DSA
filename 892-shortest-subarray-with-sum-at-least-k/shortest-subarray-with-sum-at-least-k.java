@@ -4,11 +4,10 @@ class Solution {
         int ans = Integer.MAX_VALUE;
         long[] prefix = new long[nums.length+1];
         for(int i = 0 ;i< nums.length;i++){
-            prefix[i] = (i > 0) ? prefix[i-1] + nums[i] : nums[i];
+            prefix[i+1] = prefix[i] + nums[i];
         }
     
-        for(int i = 0 ;i<nums.length;i++){
-            if(prefix[i] >= k) ans = Math.min(ans,i+1);
+        for(int i = 0 ;i<=nums.length;i++){
             while(!q.isEmpty() && prefix[i]- prefix[q.getFirst()] >= k){
                 ans = Math.min(ans,i-q.removeFirst());
             }
