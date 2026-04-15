@@ -1,16 +1,13 @@
 class Solution {
     public int closestTarget(String[] words, String target, int startIndex) {
-        int ans = Integer.MAX_VALUE;
-        int i = startIndex;
-        int j =startIndex;
-        for(int k = 0; k < words.length; k++){
-             if(words[(i) % words.length].equals(target) || words[(j + words.length) % words.length].equals(target)){
+        int n = words.length;
+        for(int k = 0; k < n; k++){
+            int next = (startIndex + k) % n;
+            int prev = (startIndex - k + n) % n;
+             if(words[next].equals(target) || words[prev].equals(target)){
                 return k;
              }
-            
-             i++;
-             j--;
         }
-        return ans == Integer.MAX_VALUE ? -1 : ans;
+        return -1;
     }
 }
