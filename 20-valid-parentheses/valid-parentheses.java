@@ -11,15 +11,14 @@ class Solution {
                     return false;
                 }
                 else{
-                    if((c == ')' & st.peek() != '(') || (c == '}' & st.peek() != '{') || (c == ']' & st.peek() != '[')){
+                    char el = st.pop();
+                    if((c == ')' & el != '(') || (c == '}' & el != '{') || (c == ']' & el != '[')){
                         return false;
                     }
-                    st.pop();
                 }
 
             }
         }
-        if(!st.isEmpty()) return false;
-        return true;
+        return st.isEmpty();
     }
 }
