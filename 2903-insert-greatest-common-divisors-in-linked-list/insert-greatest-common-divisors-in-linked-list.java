@@ -15,13 +15,7 @@ class Solution {
         while(curr!=null && curr.next!=null){
             int a = curr.val;
             int b = curr.next.val;
-            ListNode gcd;
-            if(a > b){
-            gcd = new ListNode(gcd(a,b));
-            }
-            else{
-            gcd = new ListNode(gcd(b,a));
-            }
+            ListNode gcd = new ListNode(gcd(a,b));
             ListNode temp = curr.next;
             curr.next = gcd;
             gcd.next = temp;
