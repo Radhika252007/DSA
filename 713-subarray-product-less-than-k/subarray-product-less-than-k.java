@@ -1,18 +1,17 @@
 class Solution {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
+        if(k<=1) return 0;
         int n = nums.length;
-        Deque<Integer> q = new ArrayDeque();
         int pre = 1;
         int c = 0;
-        for(int i = 0;i<n;i++){
-            pre *= nums[i];
-            q.addLast(nums[i]);
-            while(!q.isEmpty() && pre >= k){
-                pre/=q.removeFirst();
+        int left = 0;
+        for(int right = 0;right < n;right++){
+            pre *= nums[right];
+            while(pre >= k){
+                pre /= nums[left];
+                left++;
             }
-            c+=q.size();
-            
-            
+            c += (right - left + 1);
         }
         return c;
     }
