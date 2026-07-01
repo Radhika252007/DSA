@@ -1,14 +1,20 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(0,1);
-        int ans = 0;
+       return atmost(nums,goal) - atmost(nums, goal -1);
+    }
+    public int atmost(int[] nums, int goal){
+        if(goal < 0) return 0;
+        int left = 0;
         int pre = 0;
-        for(int val : nums){
-            pre += val;
-            ans += map.getOrDefault((pre - goal), 0);
-            map.put(pre, map.getOrDefault(pre, 0) + 1);
+        int c = 0;
+        for(int right = 0;right < nums.length;right++){
+            pre += nums[right];
+            while(pre > goal){
+                pre -= nums[left];
+                left++;
+            }
+            c += right - left + 1;
         }
-        return ans;
+        return c;
     }
 }
