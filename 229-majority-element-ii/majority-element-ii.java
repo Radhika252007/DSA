@@ -29,7 +29,7 @@ class Solution {
         List<Integer> res = new ArrayList<>();
         int n = nums.length;
         if(c1 > n/3) res.add(el1);
-        if(c2 > n/3) res.add(el2);
+        if(c2 > n/3 && el1 != el2) res.add(el2);
         return res;
     }
 }
