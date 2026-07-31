@@ -35,15 +35,13 @@ class Solution {
         for(int i = len;i<s.length();i++){
             hash = (hash * base - s.charAt(i - len) * power % mod + mod) % mod;
             hash = (hash + s.charAt(i)) % mod;
+            int start = i - len + 1;
             if(map.containsKey(hash)){
-                for(int start : map.get(hash)){
-                    if(s.substring(start, start + len).equals(s.substring(i - len + 1, i - len + 1 + len))){
-                        return start;
-                    }
+                for(int prev : map.get(hash)){
+                    if(s.substring(start, start+len).equals(s.substring(prev, prev+len))) return start;
                 }
             }
-            map.computeIfAbsent(hash, k -> new ArrayList<>());
-            map.get(hash).add(i - len + 1);
+            map.computeIfAbsent(hash, k -> new ArrayList<>()).add(start);
         }
         return -1;
     }
