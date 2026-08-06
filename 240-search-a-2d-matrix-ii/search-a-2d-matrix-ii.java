@@ -4,11 +4,11 @@ class Solution {
         int j = matrix[0].length - 1;
         while(i < matrix.length && j >=0){
             if(matrix[i][j] == target) return true;
-            else if(matrix[i][j] < target){
-                i++;
+            else if(matrix[i][j] > target){
+                j--;
             }
             else{
-                j--;
+                i++;
             }
         }
         return false;
