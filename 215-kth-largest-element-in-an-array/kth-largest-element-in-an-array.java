@@ -1,30 +1,36 @@
 class Solution {
     public int findKthLargest(int[] nums, int k) {
-        return quickSelect(nums,0,nums.length-1,k);
-    }
-    public int quickSelect(int[] nums, int start, int end, int k){
-        if(start > end) return -1;
-        int p = partition(nums, start, end);
-        if(p == nums.length - k) return nums[p];
-        if(p>nums.length - k){
-            return quickSelect(nums,start,p-1,k);
+        int n = nums.length;
+        for(int i = n/2-1;i>=0;i--){
+            heapify(nums,n,i);
         }
-        return quickSelect(nums,p+1,end,k);
-    }
-    public int partition(int[] nums, int start, int end){
-        int pivot = nums[end];
-        int j = start - 1;
-        for(int i=start;i<end;i++){
-            if(nums[i]< pivot){
-                j++;
-                int temp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = temp;
+        for(int i = n-1;i>=0;i--){
+            int temp = nums[0];
+            nums[0] = nums[i];
+            nums[i] = temp;
+
+            if (i == n - k) {
+                return nums[i];
             }
+            heapify(nums,i,0);
         }
-        int temp = nums[j+1];
-        nums[j+1] = nums[end];
-        nums[end] = temp;
-        return j+1;
+        return -1;
+    }
+    public void heapify(int[] array, int n, int i){
+        int max = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        if(left < n && array[left] > array[max]){
+            max = left;
+        }
+        if(right < n && array[right] > array[max]){
+            max = right;
+        }
+        if(max != i){
+            int temp = array[max];
+            array[max] = array[i];
+            array[i] = temp;
+            heapify(array,n,max);
+        }
     }
 }
