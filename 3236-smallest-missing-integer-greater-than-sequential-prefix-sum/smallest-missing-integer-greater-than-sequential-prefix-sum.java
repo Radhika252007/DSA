@@ -5,7 +5,6 @@ class Solution {
             set.add(val);
         }
         int sum = nums[0];
-        int minPrefix = Integer.MAX_VALUE;;
         for(int j = 1;j<nums.length;j++){
             if(nums[j] == nums[j-1] + 1){
                 sum += nums[j];
