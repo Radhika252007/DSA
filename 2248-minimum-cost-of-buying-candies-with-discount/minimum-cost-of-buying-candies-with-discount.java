@@ -1,23 +1,18 @@
 class Solution {
     public int minimumCost(int[] cost) {
-        if(cost.length < 3) return Arrays.stream(cost).sum(); 
         Arrays.sort(cost);
         int minCost = 0;
         int i = cost.length - 1;
-        int j = cost.length - 2;
-        while(i >= 0|| j >=0){
-            int a = 0;
-            int b = 0;
-            if(i >= 0){
-            a = cost[i];
+        int skip = 0;
+        while(i >= 0){
+            if(skip >= 2) {
+                skip = 0;
+                i--;
+                continue;
             }
-            if(j>=0){
-            b = cost[j];
-            }
-            minCost += a + b;
-                i-=3;
-                j-=3;
-            
+            minCost += cost[i];
+            skip++;   
+            i--;         
         }
         return minCost;
     }
