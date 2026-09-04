@@ -41,16 +41,14 @@ class DisjointSet{
         int up_u = findUPar(u);
         int up_v = findUPar(v);
         if(up_u == up_v) return;
+        int u_size = size.get(up_u);
+        int v_size = size.get(up_v);
         if(size.get(up_u) < size.get(up_v)){
             parent.set(up_u, up_v);
-            int u_size = size.get(up_u);
-            int v_size = size.get(up_v);
             size.set(up_v,u_size+v_size);
         }
         else{
             parent.set(up_v, up_u);
-            int u_size = size.get(up_u);
-            int v_size = size.get(up_v);
             size.set(up_u,u_size+v_size);
         }
     }
