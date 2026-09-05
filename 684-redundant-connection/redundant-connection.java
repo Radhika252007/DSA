@@ -10,10 +10,10 @@ class Solution {
                 ds.unionBySize(a,b);
             }
             else{
-                ans = edges[i];
+                return new int[]{a,b};
             }
         }
-        return ans;
+        return edges[0];
     }
 }
 class DisjointSet{
