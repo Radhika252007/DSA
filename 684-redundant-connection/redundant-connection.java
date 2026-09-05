@@ -20,8 +20,8 @@ class DisjointSet{
     List<Integer> parent;
     List<Integer> size;
     DisjointSet(int V){
-        parent = new ArrayList<>();
-        size = new ArrayList<>();
+        parent = new ArrayList<>(V);
+        size = new ArrayList<>(V);
         for(int i = 0;i < V;i++){
             parent.add(i);
             size.add(1);
