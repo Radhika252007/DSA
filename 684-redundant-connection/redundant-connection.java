@@ -4,13 +4,13 @@ class Solution {
         DisjointSet ds = new DisjointSet(n);
         int[] ans = new int[2];
         for(int i = 0;i<edges.length;i++){
-            int a = edges[i][0];
-            int b = edges[i][1];
+            int a = edges[i][0] - 1;
+            int b = edges[i][1] - 1;
             if(ds.findUPar(a) != ds.findUPar(b)){
                 ds.unionBySize(a,b);
             }
             else{
-                return new int[]{a,b};
+                return new int[]{a+1,b+1};
             }
         }
         return edges[0];
@@ -22,7 +22,7 @@ class DisjointSet{
     DisjointSet(int V){
         parent = new ArrayList<>();
         size = new ArrayList<>();
-        for(int i = 0;i <= V;i++){
+        for(int i = 0;i < V;i++){
             parent.add(i);
             size.add(1);
         }
