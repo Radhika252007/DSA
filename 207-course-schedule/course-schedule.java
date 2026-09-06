@@ -1,34 +1,37 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        for (int i = 0; i < numCourses; i++) {
-    adj.add(new ArrayList<>());
-}
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i = 0;i<numCourses;i++){
+            adj.add(new ArrayList<>());
+        }
         for(int i = 0;i<prerequisites.length;i++){
             int a = prerequisites[i][0];
-            int b =  prerequisites[i][1];
+            int b = prerequisites[i][1];
             adj.get(a).add(b);
         }
-        return isCycle(adj,numCourses);
+        return checkCycle(numCourses, adj);
     }
-    public boolean isCycle(ArrayList<ArrayList<Integer>> adj, int courses){
-        boolean[] visited = new boolean[courses];
-        boolean[] path = new boolean[courses];
-        for(int i = 0;i<courses;i++){
-            if(dfs(adj,i, visited, path)) return false;
+    public boolean checkCycle(int numCourses, List<List<Integer>> adj){
+        boolean[] visited = new boolean[numCourses];
+        boolean[] path = new boolean[numCourses];
+        for(int i = 0;i<numCourses;i++){
+            if(!visited[i]){
+                if(!dfs(i,adj,visited,path)) return false;
+            }
         }
         return true;
     }
-    public boolean dfs(ArrayList<ArrayList<Integer>> adj, int course, boolean[] visited, boolean[] path){
-        visited[course] = true;
-        path[course] = true;
-        for(int val : adj.get(course)){
+    public boolean dfs(int node, List<List<Integer>> adj, boolean[] visited, boolean[] path){
+        visited[node] = true;
+        path[node] = true;
+        for(int val : adj.get(node)){
             if(!visited[val]){
-                if(dfs(adj,val,visited, path)) return true;
+                if(!dfs(val,adj,visited,path)) return false;
             }
-            else if(path[val]) return true;
+            else if(path[val]) return false;
         }
-        path[course] = false;
-        return false;
+        path[node] = false;
+        return true;
+
     }
 }
