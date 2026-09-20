@@ -1,8 +1,4 @@
 class Trie {
-    static class Node{
-    Node[] children = new Node[26];;
-    boolean flag;
-}
 
     Node root;
 
@@ -41,7 +37,15 @@ class Trie {
         return true;
     }
 }
+class Node {
+    Node[] children;
+    boolean flag;
 
+    Node() {
+        children = new Node[26];
+        flag = false;
+    }
+}
 /**
  * Your Trie object will be instantiated and called as such:
  * Trie obj = new Trie();
