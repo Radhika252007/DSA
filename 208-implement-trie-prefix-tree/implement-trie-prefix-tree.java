@@ -1,4 +1,9 @@
 class Trie {
+    static class Node{
+    Node[] children = new Node[26];;
+    boolean flag;
+}
+
     Node root;
 
     public Trie() {
@@ -35,10 +40,6 @@ class Trie {
         }
         return true;
     }
-}
-class Node{
-    Node[] children = new Node[26];;
-    boolean flag;
 }
 
 /**
