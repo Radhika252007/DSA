@@ -1,6 +1,7 @@
 class Solution {
     public List<List<String>> suggestedProducts(String[] products, String searchWord) {
         Trie t = new Trie();
+        Arrays.sort(products);
         for(String product : products){
             t.insert(product);
         }
@@ -16,10 +17,10 @@ class Solution {
 class Trie{
     static class Node{
         Node[] children;
-        String str;
+        List<String> products;
         Node(){
             children = new Node[26];
-            str = null;
+            products = new ArrayList<>();
         }
     }
     Node root;
@@ -34,8 +35,10 @@ class Trie{
                 curr.children[c] = new Node();
             }
             curr = curr.children[c];
+            if(curr.products.size() < 3){
+            curr.products.add(word);
+            }
         }
-        curr.str = word;
     }
     public List<String> getProducts(String s){
         Node curr = root;
@@ -44,21 +47,7 @@ class Trie{
             if(curr.children[c] == null) return new ArrayList<>();
             curr = curr.children[c];
         }
-        StringBuilder sb = new StringBuilder(s);
-        List<String> ans = new ArrayList<>();
-        dfs(curr,ans,sb);
-        return ans;
+        return curr.products;
     }
-    public void dfs(Node root, List<String> ans, StringBuilder sb){
-        if(ans.size() == 3) return;
-        if(root.str != null){
-            ans.add(new StringBuilder(sb).toString());
-        }
-        for(int i = 0;i<26;i++){
-            if(root.children[i] != null){
-                dfs(root.children[i],ans,sb.append((char)('a' + i)));
-                sb.deleteCharAt(sb.length() - 1);
-            }
-        }
-    }
+    
 }
