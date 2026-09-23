@@ -9,7 +9,7 @@ class Solution {
                res[st.pop()] = num;
             }
             if(i<arr.length){
-            st.push(i);
+             st.push(i);
             }
         }
         return res;
