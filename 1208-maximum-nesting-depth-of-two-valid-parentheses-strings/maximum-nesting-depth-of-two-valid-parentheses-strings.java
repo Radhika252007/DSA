@@ -1,6 +1,6 @@
 class Solution {
     public int[] maxDepthAfterSplit(String seq) {
-        int depth = 0;
+        int depth = -1;
         int[] res = new int[seq.length()];
         for(int i = 0;i<seq.length();i++){
             char c = seq.charAt(i);
