@@ -14,11 +14,12 @@ class Solution {
                 freq--;
             }
         }
-        int c = 0;
-        for(int val : nums){
-            if(val == ans) c++;
-        }
+        // int c = 0;
+        // for(int val : nums){
+        //     if(val == ans) c++;
+        // }
 
-        return c > nums.length / 2 ? ans : -1;
+        // return c > nums.length / 2 ? ans : -1;
+        return ans;
     }
 }
