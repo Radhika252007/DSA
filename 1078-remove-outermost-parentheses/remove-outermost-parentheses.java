@@ -5,14 +5,14 @@ class Solution {
         for(int i = 0;i<s.length();i++){
             if(s.charAt(i) == '('){
                 if(count > 0){
-                    sb.append("(");
+                    sb.append('(');
                 }
                 count++;
             }
             else{
                 count--;
                 if(count > 0){
-                    sb.append(")");
+                    sb.append(')');
                 }
             }
         }
