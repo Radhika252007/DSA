@@ -17,7 +17,7 @@ class Solution {
             }
             int sum = n + m + carry;
             carry = sum / 2;
-            ans.append("" + (sum % 2));
+            ans.append((sum % 2));
         }
         return ans.reverse().toString();
     }
