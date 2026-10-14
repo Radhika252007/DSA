@@ -1,21 +1,16 @@
 class NumArray {
-    int[] nums;
-    int[] prefix;
+    int[] pre;
     public NumArray(int[] nums) {
-        this.nums = nums;
-        prefix = new int[nums.length + 1];
-        calculatePrefix();
-    }
-    public void calculatePrefix(){
-        prefix[0] = 0;
-        int n = prefix.length;
-        for(int i =1;i<n;i++){
-            prefix[i] = prefix[i-1] + nums[i-1];
+        pre = new int[nums.length+1];
+        pre[0] = 0;
+        for(int i = 1;i<pre.length;i++){
+            pre[i] = pre[i-1] + nums[i-1];
         }
+        System.out.println(Arrays.toString(pre));
     }
     
     public int sumRange(int left, int right) {
-        return prefix[right + 1] - prefix[left];
+        return pre[right+1] - pre[left];
     }
 }
 
