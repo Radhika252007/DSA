@@ -11,7 +11,7 @@ class Solution {
         for(int i = 0;i<s.length();i++){
             char c = s.charAt(i);
             maxSoFar = Math.max(lastOccur[c - 'a'], maxSoFar);
-            if(lastOccur[c - 'a'] == i && i == maxSoFar){
+            if(i == maxSoFar){
                 ans.add(i - l + 1);
                 l = i + 1;
             }
