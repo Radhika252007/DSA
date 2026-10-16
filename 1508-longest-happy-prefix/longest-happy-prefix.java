@@ -1,5 +1,6 @@
 class Solution {
     public String longestPrefix(String s) {
+        if (s.length() <= 1) return "";
         int[] lps = new int[s.length()];
         int i = 1;
         int m = s.length();
