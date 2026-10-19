@@ -9,7 +9,6 @@ class Solution {
                 curr = intervals[i];
             }
             else{
-                curr[0] = Math.min(intervals[i][0], curr[0]);
                 curr[1] = Math.max(intervals[i][1], curr[1]);
             }
         }
