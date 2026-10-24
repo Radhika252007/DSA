@@ -1,12 +1,12 @@
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
         int[] freq = new int[26];
-        for(char c : magazine.toCharArray()){
-            freq[c - 'a']++;
+        for(int i = 0;i<magazine.length();i++){
+            freq[magazine.charAt(i) - 'a']++;
         }
-        for(char c : ransomNote.toCharArray()){
-            if(freq[c - 'a'] == 0) return false;
-            freq[c-'a']--;
+        for(int i = 0;i<ransomNote.length();i++){
+            if(freq[ransomNote.charAt(i) - 'a'] == 0) return false;
+            freq[ransomNote.charAt(i) - 'a']--;
         }
         return true;
     }
