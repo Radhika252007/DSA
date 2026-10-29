@@ -4,34 +4,15 @@ class Solution {
         for(char task : tasks){
             freq[task - 'A']++;
         }
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        for(int i = 0;i<26;i++){
-            if(freq[i] != 0){
-                pq.offer(freq[i]);
-            }
+        int maxFreq = 0;
+        for(int f : freq){
+            maxFreq = Math.max(f, maxFreq);
         }
-        Queue<Task> q = new LinkedList<>();
-        int timer = 0;
-        while(!pq.isEmpty() || !q.isEmpty()){
-            timer++;
-            if(!pq.isEmpty()){
-                int t = pq.poll();
-                if(t-1!=0){
-                    q.offer(new Task(t-1,timer+n));
-                }
-            }
-            if(!q.isEmpty() && q.peek().timer == timer){
-                pq.offer(q.poll().freq);
-            }
+        int c = 0;
+        for(int x : freq){
+            if(x == maxFreq) c++;
         }
-        return timer;
-    }
-}
-class Task{
-    int freq;
-    int timer;
-    Task(int freq, int timer){
-        this.freq = freq;
-        this.timer = timer;
+        return Math.max(tasks.length, (maxFreq - 1) * (n + 1) + c);
+       
     }
 }
