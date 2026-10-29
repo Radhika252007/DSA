@@ -1,24 +1,25 @@
 class MyCircularDeque {
-    int[] arr;
-    int size = 0;
     int front;
     int rear;
-    int capacity;
+    int[] arr;
+    int k;
+    int size;
     public MyCircularDeque(int k) {
-        arr = new int[k];
         front = -1;
         rear = -1;
-        capacity = k;
+        arr = new int[k];
+        this.k = k;
+        size = 0;
     }
     
     public boolean insertFront(int value) {
-        if(size==arr.length) return false;
-        if(front==-1 && rear==-1){
+        if(size == k) return false;
+        if(front == -1){
             front = 0;
             rear = 0;
         }
         else{
-            front = (front - 1 + capacity) % capacity;
+            front = (front - 1 + k) % k;
         }
         arr[front] = value;
         size++;
@@ -26,13 +27,13 @@ class MyCircularDeque {
     }
     
     public boolean insertLast(int value) {
-        if(size==arr.length) return false;
-         if(front==-1 && rear==-1){
+        if(size == k) return false;
+        if(front == -1){
             front = 0;
             rear = 0;
         }
         else{
-            rear = (rear + 1) % capacity;
+            rear = (rear + 1) % k;
         }
         arr[rear] = value;
         size++;
@@ -40,47 +41,47 @@ class MyCircularDeque {
     }
     
     public boolean deleteFront() {
-        if(size==0) return false;
-        if(size==1){
+        if(front == -1) return false;
+        if(front == rear){
             front = -1;
             rear = -1;
         }
         else{
-        front = (front +1) % capacity;
+        front = (front + 1) % k;
         }
         size--;
         return true;
     }
     
     public boolean deleteLast() {
-         if(size==0) return false;
-        if(size==1){
+        if(rear == -1) return false;
+        if(front == rear){
             front = -1;
             rear = -1;
         }
         else{
-        rear = (rear -1 + capacity) % capacity;
+            rear = (rear - 1 + k) % k;
         }
         size--;
         return true;
     }
     
     public int getFront() {
-        if(front==-1) return -1;
+        if(isEmpty()) return -1;
         return arr[front];
     }
     
     public int getRear() {
-        if(rear == -1) return -1;
+        if(isEmpty()) return -1;
         return arr[rear];
     }
     
     public boolean isEmpty() {
-        return size==0;
+        return front == -1;
     }
     
     public boolean isFull() {
-        return size==arr.length;
+        return size == k;
     }
 }
 
