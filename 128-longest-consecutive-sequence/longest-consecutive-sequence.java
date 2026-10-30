@@ -8,8 +8,8 @@ class Solution {
         for(int val : set){
             if(!set.contains(val - 1)){
                 int low = val;
-                int c = 0;
-                while(set.contains(low)){
+                int c = 1;
+                while(set.contains(low+1)){
                     low++;
                     c++;
                 }
