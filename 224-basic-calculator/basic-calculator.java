@@ -1,13 +1,12 @@
 class Solution {
     public int calculate(String s) {
         Stack<Integer> st = new Stack<>();
-        int res = 0;
         int num = 0;
         int sign = 1;
-        for(int i = 0;i<s.length();i++){
-            char c = s.charAt(i);
+        int res = 0;
+        for(char c : s.toCharArray()){
             if(Character.isDigit(c)){
-                num = num * 10 + c - '0';
+                num = num * 10 + (c - '0');
             }
             else if(c == '+'){
                 res += num * sign;
