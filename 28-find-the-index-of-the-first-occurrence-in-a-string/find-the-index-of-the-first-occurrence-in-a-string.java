@@ -1,47 +1,25 @@
 class Solution {
     public int strStr(String haystack, String needle) {
-        int[] lps = lps(needle);
-        int i = 0;
-        int j = 0;
-        while(i < haystack.length() && j < needle.length()){
-            if(haystack.charAt(i) == needle.charAt(j)){
-                i++;
-                j++;
-                if(j == needle.length()) return i - j;
+       String newString = needle + "$" + haystack;
+       int[] z = new int[newString.length()];
+       int l = 0;
+       int r = 0;
+       int n = newString.length();
+       for(int i = 0;i<newString.length();i++){
+            if(i <= r){
+                z[i] = Math.min(r - i + 1, z[i - l]);
             }
-            else{
-                if(j == 0){
-                    i++;
-                }
-                else{
-                    j = lps[j-1];
-                }
+            while(i + z[i] < n && newString.charAt(z[i]) == newString.charAt(i + z[i])){
+                z[i]++;
             }
-        }
-        return -1;
-
-    }
-    public int[] lps(String s){
-        int m = s.length();
-        int len = 0;
-        int i = 1;
-        int[] lps = new int[m];
-        while(i < m){
-            if(s.charAt(i) == s.charAt(len)){
-                len++;
-                lps[i] = len;
-                i++;
+            if(i + z[i] - 1 > r){
+                l = i;
+                r = i + z[i] - 1;
             }
-            else{
-                if(len != 0){
-                    len = lps[len-1];
-                }
-                else{
-                    lps[i] = 0;
-                    i++;
-                }
-            }
-        }
-        return lps;
+       } 
+       for(int i = 0;i<z.length;i++){
+        if(z[i] == needle.length()) return i - (needle.length() + 1);
+       }
+       return -1;
     }
 }
