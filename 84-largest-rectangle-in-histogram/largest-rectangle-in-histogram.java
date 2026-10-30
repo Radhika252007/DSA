@@ -10,8 +10,8 @@ class Solution {
             while(!st.isEmpty() && height < heights[st.peek()]){
                 int popped = st.pop();
                 int h = heights[popped];
-                int width = st.isEmpty() ? i : i - st.peek() - 1;
-                maxArea = Math.max(maxArea, h * width);
+                int w = st.isEmpty() ? i : i - st.peek() - 1;
+                maxArea = Math.max(maxArea, h * w);
             }
             st.push(i);
         }
