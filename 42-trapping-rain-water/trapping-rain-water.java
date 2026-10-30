@@ -1,30 +1,30 @@
 class Solution {
     public int trap(int[] height) {
-        int left = 0;
-        int right = height.length - 1;
-        int leftMax = 0;
-        int rightMax = 0;
-        int water = 0;
-        while(left <= right){
-            if(height[left] <= height[right]){
-                if(height[left] > leftMax){
-                    leftMax = height[left]; 
+        int l = 0;
+        int r = height.length - 1;
+        int leftmax = 0;
+        int rightmax = 0;
+        int maxWater = 0;
+        while(l < r){
+            if(height[l] <= height[r]){
+                if(height[l] > leftmax){
+                    leftmax = height[l];
                 }
                 else{
-                    water += leftMax - height[left];
+                    maxWater += leftmax - height[l];
                 }
-                left++;
+                l++;
             }
             else{
-                if(height[right] >= rightMax){
-                    rightMax = height[right];
+                if(height[r] > rightmax){
+                    rightmax = height[r];
                 }
                 else{
-                    water += rightMax - height[right];
+                    maxWater += rightmax - height[r];
                 }
-                right--;
+                r--;
             }
         }
-        return water;
+        return maxWater;
     }
 }
