@@ -4,18 +4,18 @@ class Solution {
         for(int val : nums){
             set.add(val);
         }
-        int maxCount = 0;
+        int max = 0;
         for(int val : set){
             if(!set.contains(val - 1)){
                 int low = val;
-                int count = 1;
-                while(set.contains(low + 1)){
-                    count++;
+                int c = 0;
+                while(set.contains(low)){
                     low++;
+                    c++;
                 }
-                maxCount = Math.max(count, maxCount);
+                max = Math.max(max, c);
             }
         }
-        return maxCount;
+        return max;
     }
 }
