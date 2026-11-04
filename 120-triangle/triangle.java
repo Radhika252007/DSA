@@ -1,25 +1,22 @@
 class Solution {
-    int[][] memory;
     public int minimumTotal(List<List<Integer>> triangle) {
-        memory = new int[triangle.size()][triangle.size()];
-        for(int i=0;i<triangle.size();i++){
-        Arrays.fill(memory[i],Integer.MAX_VALUE);
+        int m = triangle.size();
+        int[][] dp = new int[m][m];
+        dp[0][0] = triangle.get(0).get(0);
+        for(int i = 1;i<m;i++){
+            dp[i][0] = triangle.get(i).get(0) + dp[i-1][0];
+            for(int j = 1;j<i;j++){
+                dp[i][j] = triangle.get(i).get(j) + Math.min(dp[i-1][j], dp[i-1][j-1]);
+            }
+            dp[i][i] = triangle.get(i).get(i) + dp[i-1][i-1];
         }
-        return minimum(triangle,0,0);
-    }
-    public int minimum(List<List<Integer>> triangle, int i, int j){
-        if(i == triangle.size()-1){
-            return triangle.get(i).get(j);
-        }
-        if(memory[i][j]!=Integer.MAX_VALUE){
-            return memory[i][j];
-        }
-        
+         int ans = Integer.MAX_VALUE;
 
-        int down = minimum(triangle,i+1,j);
-        int diag = minimum(triangle,i+1,j+1);
-       
-        memory[i][j] = triangle.get(i).get(j) + Math.min(down,diag);
-        return memory[i][j];
+        for(int j = 0; j < m; j++) {
+            ans = Math.min(ans, dp[m-1][j]);
+        }
+
+        return ans;
     }
+
 }
