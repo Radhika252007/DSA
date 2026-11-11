@@ -1,26 +1,25 @@
 class Solution {
-    static int maxLen;
-    static int minLen;
-    static Boolean[] dp;
+    int minLen;
+    int maxLen;
+    Boolean[] dp;
     public boolean wordBreak(String s, List<String> wordDict) {
-        maxLen = 0;
-        minLen = Integer.MAX_VALUE;
         dp = new Boolean[s.length()];
+        minLen = s.length();
+        maxLen = 0;
         for(String word : wordDict){
-            maxLen = Math.max(maxLen,word.length());
-            minLen = Math.min(minLen,word.length());
+            minLen = Math.min(minLen, word.length());
+            maxLen = Math.max(maxLen, word.length());
         }
-        return check(s,0,wordDict);
+        return check(s, 0, wordDict);
     }
-    public boolean check(String s, int start,List<String> wordDict){
-        if(s.length() == start) return true;
-        if(s.length() - start < minLen)
-            return false;
+    public boolean check(String s, int start, List<String> wordDict){
+        if(start == s.length()) return true;
+        if(minLen > s.length() - start) return false;
         if(dp[start] != null) return dp[start];
-        for(int i = minLen;i<=maxLen && start+i<=s.length();i++){
-            String curr = s.substring(start,start + i);
+        for(int i = minLen;i<=maxLen && start + i <= s.length();i++){
+            String curr = s.substring(start, start + i);
             if(!wordDict.contains(curr)) continue;
-            if(check(s,start + i,wordDict)){
+            if(check(s, start + i, wordDict)){
                 return dp[start] = true;
             }
         }
