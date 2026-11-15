@@ -1,29 +1,30 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        int maxVal = Arrays.stream(piles).max().getAsInt();
-
+        int max = 0;
+        for(int val : piles){
+            max = Math.max(max, val);
+        }
         int start = 1;
-        int end = maxVal;
-        int ans = maxVal;
+        int end = max;
+        long ans = max;
         while(start <= end){
             int mid = start + (end - start)/2;
-            long totalHrs = calculateHrs(piles, mid);
-            if(totalHrs <= h){
+            long v = canFinish(piles, mid);
+            if(v <= h){
                 ans = mid;
                 end = mid - 1;
             }
             else{
                 start = mid + 1;
             }
-
         }
-        return ans;
+        return (int)ans;
     }
-    public long calculateHrs(int[] piles, int speed){
-        long totalHrs = 0;
-        for(int bananas : piles){
-            totalHrs += (bananas + speed - 1L) / speed;
+    public long canFinish(int[] arr, int limit){
+        long hrsTaken = 0;
+        for(int pile : arr){
+            hrsTaken += (pile + limit - 1L) / limit;
         }
-        return totalHrs;
+        return hrsTaken;
     }
 }
