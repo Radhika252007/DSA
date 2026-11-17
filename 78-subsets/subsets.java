@@ -1,18 +1,17 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> list = new ArrayList<>();
-        List<Integer> subset = new ArrayList<>();
-        getSubsets(list,nums,subset,0);
-        return list;
+        List<List<Integer>> ans = new ArrayList<>();
+        solve(nums, 0, new ArrayList<>(), ans);
+        return ans;
     }
-    public void getSubsets(List<List<Integer>> list, int[] nums,List<Integer> subset,int index){
-        if(index==nums.length){
-            list.add(new ArrayList<>(subset));
+    public void solve(int[] nums, int i, List<Integer> curr, List<List<Integer>> ans){
+        if(i == nums.length){
+            ans.add(new ArrayList<>(curr));
             return;
         }
-        getSubsets(list,nums,subset,index+1);
-        subset.add(nums[index]);
-        getSubsets(list,nums,subset,index+1);
-        subset.remove(subset.size()-1);
+        solve(nums, i+1, curr, ans);
+        curr.add(nums[i]);
+        solve(nums, i+1, curr, ans);
+        curr.remove(curr.size()-1);
     }
 }
