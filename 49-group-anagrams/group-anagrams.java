@@ -1,29 +1,34 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        HashMap<String,List<String>> map = new HashMap<>();
-        for(int i = 0; i< strs.length;i++){
-            String key = func(strs[i]);
-            if(!map.containsKey(key)){
-                map.put(key,new ArrayList<>());
+        List<List<String>> ans = new ArrayList<>();
+        HashMap<String, List<String>> map = new HashMap<>();
+        for(String s : strs){
+            String a = convert(count(s));
+            if(map.containsKey(a)){
+                map.get(a).add(s);
             }
-            map.get(key).add(strs[i]);
+            else{
+                map.put(a, new ArrayList<>());
+                map.get(a).add(s);
+            }
         }
-        List<List<String>> res = new ArrayList<>();
-        for(List<String> list : map.values()){
-            res.add(list);
+        for(String s : map.keySet()){
+            ans.add(map.get(s));
         }
-        return res;
+        return ans;
     }
-    public String func(String s){
+    public String convert(int[] freq){
+        String sb = "";
+        for(int f : freq){
+            sb += f +"#";
+        }
+        return sb;
+    }
+    public int[] count(String s){
         int[] freq = new int[26];
-        for(int i = 0 ;i< s.length();i++){
-            char ch = s.charAt(i);
-            freq[ch-'a']++;
+        for(char c : s.toCharArray()){
+            freq[c - 'a']++;
         }
-        StringBuilder sb = new StringBuilder();
-        for(int i=0;i<26;i++){
-            sb.append(freq[i]+" ");
-        }
-        return sb.toString();
+        return freq;
     }
 }
