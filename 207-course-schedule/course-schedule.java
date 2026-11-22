@@ -4,10 +4,8 @@ class Solution {
         for(int i = 0;i<numCourses;i++){
             adj.add(new ArrayList<>());
         }
-        for(int i = 0;i<prerequisites.length;i++){
-            int a = prerequisites[i][0];
-            int b = prerequisites[i][1];
-            adj.get(a).add(b);
+        for(int[] r : prerequisites){
+            adj.get(r[0]).add(r[1]);
         }
         return checkCycle(numCourses, adj);
     }
@@ -16,22 +14,21 @@ class Solution {
         boolean[] path = new boolean[numCourses];
         for(int i = 0;i<numCourses;i++){
             if(!visited[i]){
-                if(!dfs(i,adj,visited,path)) return false;
+                if(!dfs(i,visited, path, adj)) return false;
             }
         }
         return true;
     }
-    public boolean dfs(int node, List<List<Integer>> adj, boolean[] visited, boolean[] path){
+    public boolean dfs(int node, boolean[] visited, boolean[] path, List<List<Integer>> adj){
         visited[node] = true;
         path[node] = true;
-        for(int val : adj.get(node)){
-            if(!visited[val]){
-                if(!dfs(val,adj,visited,path)) return false;
+        for(int a : adj.get(node)){
+            if(!visited[a]){
+                if(!dfs(a, visited, path, adj)) return false;
             }
-            else if(path[val]) return false;
+            else if(path[a]) return false;
         }
         path[node] = false;
         return true;
-
     }
 }
