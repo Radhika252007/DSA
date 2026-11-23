@@ -1,18 +1,21 @@
 class Solution {
     public int minCost(String colors, int[] neededTime) {
         int sum = 0;
-        for(int i = 1;i<colors.length();i++){
-            int maxVal = 0;
-            while(i < colors.length() && colors.charAt(i) == colors.charAt(i-1)){
-                sum += neededTime[i-1];
-                maxVal = Math.max(neededTime[i-1], maxVal);
-                i++;
+        int p = 0;
+        for(int c = 1;c<colors.length();c++){
+            if(colors.charAt(c) == colors.charAt(p)){
+                if(neededTime[p] > neededTime[c]){
+                    sum += neededTime[c];
+                }
+                else{
+                    sum += neededTime[p];
+                    p = c;
+                }
             }
-            sum += neededTime[i-1];
-            maxVal = Math.max(neededTime[i-1], maxVal);
-            if(maxVal != 0) sum -= maxVal;
+            else{   
+                p = c;
+            }
         }
         return sum;
-
     }
 }
