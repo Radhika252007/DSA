@@ -13,26 +13,19 @@
  *     }
  * }
  */
-
-// dfs will be used
-// 
 class Solution {
-    int ans = Integer.MIN_VALUE;
+    int max;
     public int maxPathSum(TreeNode root) {
-      helper(root);
-      return ans;
+        if(root == null) return 0;
+        max = root.val;
+        height(root);
+        return max;
     }
-    int helper(TreeNode root){
-        if(root == null){
-            return 0;
-        }
-        int left = helper(root.left);
-        int right = helper(root.right);
-        left = Math.max(0,left);
-        right = Math.max(0,right);
-        int pathSum = left + right + root.val;
-        ans = Math.max(ans, pathSum);
-        return Math.max(left,right) + root.val;
+    public int height(TreeNode root){
+        if(root == null) return 0;
+        int left = Math.max(0,height(root.left));
+        int right = Math.max(0,height(root.right));
+        if(left + right + root.val > max) max = left + right + root.val;
+        return root.val + Math.max(left, right); 
     }
-    
 }
